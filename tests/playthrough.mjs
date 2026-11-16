@@ -90,7 +90,19 @@ async function play(browser, [w, h], perfect) {
 }
 
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined, args: process.env.CI || process.env.CHROME_PATH ? ['--no-sandbox'] : [] });
-for (const size of SIZES) { await play(browser, size, true); await play(browser, size, false); }
+// Wording must not give an answer away: the correct option of a choice may not be
+// the only one whose first word differs from a first word the other options share.
+{
+  const page = await browser.newPage();
+  await page.goto(origin + '/');
+  const tells = await page.evaluate(() => CASES.flatMap((c, i) => c.steps.filter(st => st.t === 'choice' && st.opts.length >= 3).flatMap(st => {
+    const first = o => o.s.split(/\s+/)[0].toLowerCase().replace(/[^a-z0-9/]/g, ''), wrong = st.opts.filter(o => !o.ok), right = st.opts.find(o => o.ok);
+    return wrong.every(o => first(o) === first(wrong[0])) && first(right) !== first(wrong[0]) ? [`case ${i + 1}: "${st.q}"`] : [];
+  })));
+  for (const t of tells) fail('answer guessable from wording in ' + t);
+  await page.close();
+}
+if (!process.env.QUICK) for (const size of SIZES) { await play(browser, size, true); await play(browser, size, false); }
 
 // The installable pieces exist and are well formed.
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'manifest.webmanifest'), 'utf8'));

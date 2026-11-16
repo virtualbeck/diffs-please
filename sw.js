@@ -1,5 +1,5 @@
 // Offline cache. Bump CACHE when shipping a new version.
-const CACHE = 'diffs-please-v2';
+const CACHE = 'diffs-please-v3';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest',
   'fonts/VT323-Regular.ttf', 'fonts/Silkscreen-Regular.ttf', 'fonts/Silkscreen-Bold.ttf',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png'];

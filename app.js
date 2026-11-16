@@ -231,15 +231,15 @@ const CASES = [
     explain:'**Small tickets** matter because each one must fit in a single fresh agent session.'},
    {t:'choice', ctx:'The agent drafted four tickets and asks you to check them. The test for each one: when it is finished, could you **try it out on its own**? If yes, it is a vertical slice. If it only becomes useful once other tickets land, it is a horizontal slice, and it has to go.',
     q:'Which ticket fails the test?', opts:[
-     {s:'A user can subscribe to one plan.', fb:'When this is finished you can open the app and subscribe. It can be tried on its own, so it passes.'},
-     {s:'Create the database tables for billing.', ok:1, fb:'**Nothing to try.** Tables alone do nothing anyone can see. That work belongs inside the first ticket that needs it, because a slice cuts through every layer.'},
-     {s:'A user can cancel their plan.', fb:'When this is finished you can open the app and cancel. It can be tried on its own, so it passes.'},
-     {s:'A user gets a receipt by email on renewal.', fb:'When this is finished a real receipt arrives in a real inbox. It can be tried on its own, so it passes.'}]},
+     {s:'Subscribe to one plan from the pricing page.', fb:'When this is finished you can open the app and subscribe. It can be tried on its own, so it passes.'},
+     {s:'Store plans and payments in new database tables.', ok:1, fb:'**Nothing to try.** Tables alone do nothing anyone can see. That work belongs inside the first ticket that needs it, because a slice cuts through every layer.'},
+     {s:'Cancel a plan from the account page.', fb:'When this is finished you can open the app and cancel. It can be tried on its own, so it passes.'},
+     {s:'Email a receipt on each renewal.', fb:'When this is finished a real receipt arrives in a real inbox. It can be tried on its own, so it passes.'}]},
    {t:'choice', ctx:'Each ticket also says what **blocks** it: the tickets that must be finished before it can start. A ticket should wait only for what truly gates it. Anything with no blockers can start right away, even alongside others.',
-    q:'"A user can cancel their plan" should wait for which ticket?', opts:[
+    q:'"Cancel a plan from the account page" should wait for which ticket?', opts:[
      {s:'Nothing. It can start right away.', fb:'There is nothing to cancel until someone is able to subscribe.'},
-     {s:'A user gets a receipt by email on renewal.', fb:'Receipts and cancelling do not depend on each other. Making one wait for the other only slows the build.'},
-     {s:'A user can subscribe to one plan.', ok:1, fb:'**That is the real gate.** You cannot cancel a plan that cannot be started. The receipt ticket waits for the same one, so both can be built side by side.'},
+     {s:'Email a receipt on each renewal.', fb:'Receipts and cancelling do not depend on each other. Making one wait for the other only slows the build.'},
+     {s:'Subscribe to one plan from the pricing page.', ok:1, fb:'**That is the real gate.** You cannot cancel a plan that cannot be started. The receipt ticket waits for the same one, so both can be built side by side.'},
      {s:'Every other ticket, to be safe.', fb:'Over-blocking forces the tickets to be built one at a time. Only real gates count.'}]}],
   end:'Three tickets published, each one a slice you can try. Interview, spec and tickets all happened in one session, so nothing was lost between them.',
   lesson:'For a big build: **/to-spec, then /to-tickets**. Do the interview, spec and tickets in **one unbroken session**.'},
@@ -369,7 +369,7 @@ const CASES = [
     explain:'A retro improves **future runs**, so it changes what surrounds the agent.'},
    {t:'choice', ctx:'The docs split mistakes in two. A **mechanical** mistake follows a fixed pattern a machine can spot, like using a banned function. A **judgement call** needs taste, like "does this match the style around it?"',
     q:'The agent used a banned function twice. What is the fix?', opts:[
-     {s:'A line in the agent\'s instructions: never use it', fb:'Instructions get missed. For a fixed pattern the docs say: build the check, full stop.'},
+     {s:'One more line in the agent\'s instructions: never use it', fb:'Instructions get missed. For a fixed pattern the docs say: build the check, full stop.'},
      {s:'An automatic check that fails whenever the function appears', ok:1, fb:'**Mechanical mistakes become automatic checks.** The check catches it every time, and costs no tokens.'},
      {s:'A new rule in CODING_STANDARDS.md for the reviewer', fb:'Standards are for judgement calls. A machine can catch this one, so let it.'}]},
    {t:'choice', ctx:'The reviewer also noted: "new code does not match the style of the file around it."', q:'Where does that lesson go?', opts:[
