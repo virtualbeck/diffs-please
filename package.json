@@ -1,0 +1,11 @@
+{
+  "name": "diffs-please",
+  "private": true,
+  "description": "A pixel game that teaches the mattpocock/skills workflow for AI coding agents.",
+  "scripts": {
+    "test": "node tests/playthrough.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}
