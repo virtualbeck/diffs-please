@@ -102,6 +102,13 @@ for (const f of ['index.html', 'style.css', 'app.js', 'sw.js']) {
   const hosts = (fs.readFileSync(path.join(ROOT, f), 'utf8').match(/https?:\/\/[^\s'"<>)]+/g) || []).filter(u => !/^https:\/\/github\.com\/mattpocock\/skills$/.test(u) && !/^http:\/\/www\.w3\.org\//.test(u));
   if (hosts.length) fail(`${f} references outside hosts: ${hosts.join(', ')}`);
 }
+// House rule: no em dashes in anything the repo ships or documents.
+const walk = dir => fs.readdirSync(dir, { withFileTypes: true }).flatMap(e => {
+  const full = path.join(dir, e.name);
+  if (['node_modules', '.git', 'third_party', 'fonts', 'icons'].includes(e.name)) return [];
+  return e.isDirectory() ? walk(full) : [full];
+});
+for (const f of walk(ROOT)) if (/\.(md|html|css|js|mjs|json|webmanifest|yml|sh)$/.test(f) && fs.readFileSync(f, 'utf8').includes('\u2014')) fail('em dash in ' + path.relative(ROOT, f));
 
 await browser.close(); server.close();
 if (problems.length) { console.log(`\n${problems.length} problem(s).`); process.exit(1); }
