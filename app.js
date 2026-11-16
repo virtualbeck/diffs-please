@@ -421,8 +421,10 @@ const page = $('#page'), sheet = $('#sheet');
 
 /* fit: shrink the type until the screen holds everything. Nothing ever scrolls. */
 function fit(){
-  const t = sheet.hidden ? page : sheet, R = document.documentElement; let s = 1;
-  R.style.fontSize = '16px';
+  const t = sheet.hidden ? page : sheet, R = document.documentElement;
+  // Start from a size that suits the column width, then shrink until the screen holds everything.
+  let s = Math.min(1.5, Math.max(1, $('#app').clientWidth / 390));
+  R.style.fontSize = (16 * s) + 'px';
   while (t.scrollHeight > t.clientHeight + 1 && s > 0.5) { s -= 0.025; R.style.fontSize = (16 * s) + 'px'; }
   window.__scale = s;
 }

@@ -9,7 +9,7 @@ body{font-family:'VT323',ui-monospace,Menlo,monospace;font-size:1.3rem;line-heig
 button{font:inherit;color:inherit;cursor:pointer;border-radius:0;touch-action:manipulation;margin:0}
 button:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .px{font-family:'Silkscreen',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.02em}
-#app{position:relative;max-width:440px;height:100vh;height:100dvh;margin:0 auto;background:var(--night);display:flex;flex-direction:column;overflow:hidden}
+#app{position:relative;max-width:max(440px,62vh);max-width:max(440px,62dvh);height:100vh;height:100dvh;margin:0 auto;background:var(--night);display:flex;flex-direction:column;overflow:hidden}
 #hud{flex-shrink:0;display:flex;align-items:center;gap:.5rem;padding:calc(.25rem + env(safe-area-inset-top)) .6rem .25rem;background:var(--ink);border-bottom:3px solid var(--desk)}
 #day{font-size:.72rem;font-weight:700;white-space:nowrap}
 #hud .ctx{flex:1;display:flex;align-items:center;gap:.35rem;min-width:0}

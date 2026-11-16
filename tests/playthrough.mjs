@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.ttf': 'font/ttf', '.webmanifest': 'application/manifest+json' };
 const PERFECT_BURN = 173;
-const SIZES = [[390, 844], [375, 667], [360, 640], [430, 932], [1280, 800]];
+const SIZES = [[390, 844], [375, 667], [360, 640], [430, 932], [820, 1180], [1280, 800], [1920, 1080]];
 
 const server = http.createServer((req, res) => {
   const rel = decodeURIComponent(new URL(req.url, 'http://x').pathname).replace(/\/$/, '/index.html');
