@@ -4,7 +4,7 @@ A small pixel game that teaches you to run AI coding agents well, even if you ha
 
 You staff a checkpoint on the border of `main`. Agents bring their work. You pick the right skill, read what it finds, and stamp.
 
-Play it: https://skills.virtualbeck.com
+Play it: https://diffs-please.virtualbeck.com
 
 It teaches the skills from [mattpocock/skills](https://github.com/mattpocock/skills), as their docs describe them. This is an unofficial fan project and is not affiliated with or endorsed by Matt Pocock.
 
