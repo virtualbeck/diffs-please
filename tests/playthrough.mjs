@@ -111,7 +111,7 @@ const sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
 for (const m of sw.match(/'[^']+\.(?:html|css|js|ttf|png|webmanifest)'/g) || []) if (!fs.existsSync(path.join(ROOT, m.slice(1, -1)))) fail('service worker caches a missing file: ' + m);
 // No third-party hosts in what ships, apart from the credit link.
 for (const f of ['index.html', 'style.css', 'app.js', 'sw.js']) {
-  const hosts = (fs.readFileSync(path.join(ROOT, f), 'utf8').match(/https?:\/\/[^\s'"<>)]+/g) || []).filter(u => !/^https:\/\/github\.com\/mattpocock\/skills$/.test(u) && !/^http:\/\/www\.w3\.org\//.test(u));
+  const hosts = (fs.readFileSync(path.join(ROOT, f), 'utf8').match(/https?:\/\/[^\s'"<>)]+/g) || []).filter(u => !/^https:\/\/github\.com\/(mattpocock\/skills|virtualbeck\/diffs-please)$/.test(u) && !/^http:\/\/www\.w3\.org\//.test(u));
   if (hosts.length) fail(`${f} references outside hosts: ${hosts.join(', ')}`);
 }
 // House rule: no em dashes in anything the repo ships or documents.

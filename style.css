@@ -96,6 +96,8 @@ h2{margin:0;font-size:.7rem;text-align:center;color:var(--dim);font-weight:400}
 .kind{font-size:.6rem;color:var(--dim)}
 .when{color:var(--green)}
 .sheethead{display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.75rem;border-bottom:3px solid var(--desk);padding-bottom:.4rem}
+.sheetbtns{display:flex;gap:.4rem}
+.srclink{display:flex;align-items:center;justify-content:center;text-decoration:none}
 .center{text-align:center}
 .hl{color:var(--amber)}
 .paper .hl{color:var(--rust)}

@@ -462,7 +462,7 @@ function icon(kind, col){
   const s = el('span');
   s.innerHTML = kind === 'ok'
     ? '<svg class="ico" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path d="M1 4h1v1h1v1h1V5h1V4h1V3h1V2H6v1H5v1H4v1H3V4H2V3H1z" fill="' + (col || '#b9c98a') + '"/></svg>'
-    : '<svg class="ico" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path d="M3 0h2v1h1v2h1v2h1v3H0V5h1V3h1V1h1z" fill="' + (col || '#e8a33d') + '"/><rect x="3.5" y="2.5" width="1" height="2.5" fill="' + (col ? '#fff' : '#12110f') + '"/><rect x="3.5" y="5.8" width="1" height="1" fill="' + (col ? '#fff' : '#12110f') + '"/></svg>';
+    : '<svg class="ico" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="2" height="5" fill="' + (col || '#e8a33d') + '"/><rect x="3" y="6" width="2" height="2" fill="' + (col || '#e8a33d') + '"/></svg>';
   return s.firstChild;
 }
 function sprite(kind, color){
@@ -698,7 +698,11 @@ function drawSheet(){
   const pg = SH.pages[SH.k], n = SH.pages.length;
   sheet.innerHTML = '';
   const h = el('div', 'sheethead px'); h.appendChild(el('span', '', 'Cheat sheet · ' + (SH.k + 1) + '/' + n));
-  const x = el('button', 'hbtn px', 'Close'); x.type = 'button'; x.onclick = () => { sheet.hidden = true; fit(); $('#help').focus(); }; h.appendChild(x);
+  const src = el('a', 'hbtn srclink'); src.href = 'https://github.com/virtualbeck/diffs-please'; src.target = '_blank'; src.rel = 'noopener';
+  src.setAttribute('aria-label', 'Source code on GitHub');
+  src.innerHTML = '<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M5 4h1v1H5v1H4v1H3v2h1v1h1v1h1v1H5v-1H4v-1H3v-1H2V7h1V6h1V5h1zM11 4h-1v1h1v1h1v1h1v2h-1v1h-1v1h-1v1h1v-1h1v-1h1v-1h1V7h-1V6h-1V5h-1zM9 3H8v3H7v4H6v3h1v-3h1V6h1z" fill="currentColor"/></svg>';
+  const x = el('button', 'hbtn px', 'Close'); x.type = 'button'; x.onclick = () => { sheet.hidden = true; fit(); $('#help').focus(); };
+  const grp = el('div', 'sheetbtns'); grp.appendChild(src); grp.appendChild(x); h.appendChild(grp);
   sheet.appendChild(h); sheet.appendChild(el('h1', 'px', pg[0]));
   pg[1].forEach(nd => sheet.appendChild(nd));
   const f = el('div', 'foot'), prev = btn('Back', () => { SH.k--; sfx.tick(); drawSheet(); }, 'alt'), next = btn('Next page', () => { SH.k++; sfx.tick(); drawSheet(); });
