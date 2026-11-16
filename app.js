@@ -485,7 +485,7 @@ function hud(){
 function burn(n, avoid){ S.dayBurn += n; S.caseBurn += n; if (avoid) { S.dayAvoid += n; S.caseAvoid += n; } }
 function useCtx(n, avoid){
   burn(n, avoid); S.ctx += n;
-  if (S.ctx >= 100) { S.ctx = 40; burn(20, true); S.note = 'The agent\'s context filled up, so it got confused. You had to shrink its memory with /compact. That burned 20k tokens.'; }
+  if (S.ctx >= 100) { S.ctx = 40; burn(20, true); S.note = 'The agent\'s context filled up, so it got confused. You had to shrink its memory with /compact. Avoidable burn: 20k tokens.'; }
 }
 function miss(){ useCtx(5, true); sfx.bad(); }
 const noteBox = () => S.note ? box('fb bad', 'Out of context', S.note) : null;
@@ -597,8 +597,8 @@ function rStamp(c, st){
         V.done = true; V.mark = [id, mark]; sfx.stamp();
         if (id === st.ok) { V.fb = {ok:true, txt:st.fb[id]}; setTimeout(sfx.ok, 180); }
         else {
-          if (st.cit.includes(id)) { burn(40, true); S.dayCits.push(st.fb[id]); V.cit = st.fb[id] + ' Cleaning up burned 40k tokens.'; }
-          else { burn(10, true); V.soft = st.fb[id] + ' The rework burned 10k tokens.'; }
+          if (st.cit.includes(id)) { burn(40, true); S.dayCits.push(st.fb[id]); V.cit = st.fb[id] + ' Avoidable burn: 40k tokens.'; }
+          else { burn(10, true); V.soft = st.fb[id] + ' Avoidable burn: 10k tokens.'; }
           setTimeout(sfx.bad, 180);
         }
         render();
